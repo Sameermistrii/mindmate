@@ -38,7 +38,8 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=2.7.0&t=1735396700">
-    <link rel="stylesheet" href="target-cursor.css">
+    <!-- Target Cursor CSS - Desktop Only -->
+    <link rel="stylesheet" href="target-cursor.css" media="(min-width: 769px)">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
@@ -75,8 +76,12 @@
 <body>
     <!-- Main Content -->
     <div id="main-content" class="main-content" role="main">
-        <!-- Ultra-Luxurious 3D Glassmorphism Header -->
-        <header class="fixed top-4 left-1/2 -translate-x-1/2 z-[101] w-[95%] max-w-7xl header" role="banner">
+        
+        <!-- React Staggered Menu Container (Mobile Only) -->
+        <div id="staggered-menu-container" class="mobile-only"></div>
+        
+        <!-- Ultra-Luxurious 3D Glassmorphism Header (Desktop Only) -->
+        <header class="fixed top-4 left-1/2 -translate-x-1/2 z-[101] w-[95%] max-w-7xl header desktop-only" role="banner">
             <nav class="flex items-center justify-between rounded-xl bg-black/10 dark:bg-black/20 backdrop-blur-lg border border-white/10 dark:border-white/5 shadow-2xl shadow-black/20 p-4 nav" role="navigation" aria-label="Primary">
                 <div class="flex items-center gap-3 logo">
                     <span class="text-4xl">🧠</span>
@@ -89,18 +94,15 @@
                     <a class="px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/70 hover:text-white bg-transparent hover:bg-primary/20 hover:border-primary/30 border border-transparent transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 cursor-target nav-link" href="?section=learning-section" data-action="navigate" data-section="learning-section" id="nav-learning">Learning</a>
                     <a class="px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/70 hover:text-white bg-transparent hover:bg-primary/20 hover:border-primary/30 border border-transparent transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 cursor-target nav-link" href="?section=community-section" data-action="navigate" data-section="community-section" id="nav-community">Community</a>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div id="auth-buttons" class="flex items-center gap-2">
-                        <button class="bg-transparent border-2 border-primary text-primary font-bold text-sm px-4 py-2 rounded-lg hover:bg-primary hover:text-background-dark transition-all duration-300 transform hover:scale-105 cursor-target" onclick="window.location.href='/login/'">
+                <div class="flex items-center gap-2">
+                    <div id="auth-buttons" class="flex items-center gap-1 sm:gap-2">
+                        <button class="bg-transparent border-2 border-primary text-primary font-bold text-xs sm:text-sm px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-primary hover:text-background-dark transition-all duration-300 transform hover:scale-105 cursor-target" onclick="window.location.href='/login/'">
                             Login
                         </button>
-                        <button class="bg-primary text-background-dark font-bold text-sm px-6 py-2.5 rounded-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 glow-effect cursor-target" id="signupNavItem" onclick="window.location.href='/signup/'">
+                        <button class="bg-primary text-background-dark font-bold text-xs sm:text-sm px-3 sm:px-6 py-1.5 sm:py-2.5 rounded-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 glow-effect cursor-target" id="signupNavItem" onclick="window.location.href='/signup/'">
                             Sign Up
                         </button>
                     </div>
-                    <button class="hidden p-2 rounded-lg bg-white/5 dark:bg-white/10 backdrop-blur-sm border border-white/10 nav-toggle cursor-target" data-action="toggle-mobile-menu" aria-label="Toggle menu">
-                        <span class="material-symbols-outlined text-white">menu</span>
-                    </button>
                 </div>
             </nav>
         </header>
@@ -1164,11 +1166,21 @@
                   display: flex;
                   align-items: center;
                   gap: 0.5rem;
+                  width: 100%;
+                  justify-content: center;
                 ">
                   👤 ${user.username} ▼
                 </button>
               `;
-              navLinksContainer.appendChild(userMenu);
+              
+              // Insert user menu into nav container (for mobile compatibility)
+              const authButtonsContainer = document.getElementById('auth-buttons');
+              if (authButtonsContainer && authButtonsContainer.parentNode) {
+                authButtonsContainer.parentNode.insertBefore(userMenu, authButtonsContainer);
+              } else {
+                navLinksContainer.appendChild(userMenu);
+              }
+              
               console.log('✅ User menu created for:', user.username);
             }
             
@@ -1280,10 +1292,29 @@
     </script>
     <!-- GSAP Library for enhanced animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- React Dependencies for Staggered Menu -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <!-- Enhanced Target Cursor -->
-    <script src="target-cursor.js"></script>
+    <!-- Target Cursor JS - Desktop Only -->
+    <script>
+        // Only load target cursor on desktop devices
+        if (window.innerWidth > 768 && !('ontouchstart' in window)) {
+            const script = document.createElement('script');
+            script.src = 'target-cursor.js';
+            document.head.appendChild(script);
+        }
+    </script>
     <script src="script.js?v=2.1.0&t=1735396300"></script>
     <script src="unified-analytics.js?v=2.0.0&t=1735395600"></script>
+    <script type="module" src="react-mobile-menu.js"></script>
+    
+    <!-- Simple Mobile Menu Fix -->
+    <script src="simple-mobile-menu-fix.js"></script>
+    
+    <!-- Mobile Scroll Fix -->
+    <script src="mobile-scroll-fix.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",

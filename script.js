@@ -492,17 +492,8 @@ function showSection(sectionName) {
         console.warn('Routing update failed:', e);
     }
     
-    // Auto-close mobile menu when section changes
-    closeMobileMenu();
 }
 
-// Close mobile menu function
-function closeMobileMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    if (navLinks) {
-        navLinks.classList.remove('open');
-    }
-}
 
 // Quiz Functions
 function startQuiz() {
@@ -2034,21 +2025,6 @@ Date: ${new Date().toLocaleDateString()}
     showNotification(`Career profile downloaded! 💾`, 'success');
 }
 
-// Mobile navigation toggle
-function toggleMobileMenu() {
-    const nav = document.querySelector('.nav-links');
-    if (nav) {
-        nav.classList.toggle('open');
-    }
-}
-
-// Close mobile menu
-function closeMobileMenu() {
-    const mobileMenu = document.querySelector('.nav-links');
-    if (mobileMenu && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-    }
-}
 
 // Skip loading function for demo mode
 function skipLoading() {
@@ -2226,8 +2202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             trackEvent('nav_click', { section });
             showSection(section);
             
-            // Auto-close mobile menu after navigation
-            closeMobileMenu();
             return;
         }
 
@@ -2245,8 +2219,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 trackEvent('nav_click', { section });
                 showSection(section);
                 
-                // Auto-close mobile menu after navigation
-                closeMobileMenu();
             }
         } else if (action === 'start-quiz') {
             e.preventDefault();
@@ -2263,9 +2235,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 startQuiz();
             }, 100);
-        } else if (action === 'toggle-mobile-menu') {
-            e.preventDefault();
-            document.querySelector('.nav-links')?.classList.toggle('open');
         } else if (action === 'quiz-select') {
             e.preventDefault();
             const key = target.getAttribute('data-key');

@@ -185,3 +185,57 @@ input[type="checkbox"], input[type="radio"] {
         transition: none;
     }
 }
+
+/* Mobile Device Support - Disable target cursor on mobile */
+@media (max-width: 768px) {
+    .target-cursor-wrapper {
+        display: none !important;
+    }
+    
+    .target-cursor-dot {
+        display: none !important;
+    }
+    
+    .target-cursor-corner {
+        display: none !important;
+    }
+    
+    /* Restore normal cursor behavior on mobile */
+    a, button, input, select, textarea, label,
+    [role="button"], [role="link"], [role="tab"], [role="menuitem"],
+    [tabindex], [data-action], [onclick],
+    .btn, .button, .link, .nav-link, .menu-item,
+    .quiz-option, .learning-card, .career-card, .feature-card,
+    .cursor-target, .clickable, .interactive,
+    .bottom-nav button, .nav-links a, .user-menu,
+    .stat-card, .achievement-card, .progress-card,
+    .learning-card-btn, .career-match-card, .recommendation-card,
+    .modal .close-modal, .modal button {
+        cursor: default !important;
+    }
+    
+    /* Form elements on mobile */
+    input, select, textarea {
+        cursor: text !important;
+    }
+    
+    input[type="button"], input[type="submit"], input[type="reset"],
+    input[type="checkbox"], input[type="radio"] {
+        cursor: default !important;
+    }
+}
+
+/* Touch device detection */
+@media (hover: none) and (pointer: coarse) {
+    .target-cursor-wrapper {
+        display: none !important;
+    }
+    
+    .target-cursor-dot {
+        display: none !important;
+    }
+    
+    .target-cursor-corner {
+        display: none !important;
+    }
+}

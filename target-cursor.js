@@ -34,6 +34,12 @@ class TargetCursor {
             return;
         }
 
+        // Check if device is mobile/touch device
+        if (this.isMobileDevice()) {
+            console.log('📱 Target Cursor disabled on mobile device');
+            return;
+        }
+
         this.createCursorElement();
         this.setupEventListeners();
         this.createSpinTimeline();
@@ -45,6 +51,22 @@ class TargetCursor {
         }
 
         console.log('✨ MindMate Enhanced Target Cursor initialized');
+    }
+
+    isMobileDevice() {
+        // Check for touch capability
+        const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // Check screen width
+        const isSmallScreen = window.innerWidth <= 768;
+        
+        // Check user agent for mobile devices
+        const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Check for mobile-specific features
+        const isMobileFeatures = 'orientation' in window && 'onorientationchange' in window;
+        
+        return hasTouch && (isSmallScreen || isMobileUA || isMobileFeatures);
     }
 
     getDefaultTargetSelector() {
@@ -462,6 +484,11 @@ class TargetCursor {
             clientY: gsap.getProperty(this.cursorElement, 'y') || 0
         });
         this.moveHandler(mouseEvent);
+    }
+
+    // Method to check if cursor is active
+    isActive() {
+        return this.cursorElement !== null && !this.isMobileDevice();
     }
 }
 
