@@ -90,9 +90,14 @@
                     <a class="px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/70 hover:text-white bg-transparent hover:bg-primary/20 hover:border-primary/30 border border-transparent transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 cursor-target nav-link" href="?section=community-section" data-action="navigate" data-section="community-section" id="nav-community">Community</a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button class="bg-primary text-background-dark font-bold text-sm px-6 py-2.5 rounded-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 glow-effect cursor-target" id="signupNavItem" onclick="window.location.href='/signup/'">
-                        Sign Up
-                    </button>
+                    <div id="auth-buttons" class="flex items-center gap-2">
+                        <button class="bg-transparent border-2 border-primary text-primary font-bold text-sm px-4 py-2 rounded-lg hover:bg-primary hover:text-background-dark transition-all duration-300 transform hover:scale-105 cursor-target" onclick="window.location.href='/login/'">
+                            Login
+                        </button>
+                        <button class="bg-primary text-background-dark font-bold text-sm px-6 py-2.5 rounded-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:scale-105 glow-effect cursor-target" id="signupNavItem" onclick="window.location.href='/signup/'">
+                            Sign Up
+                        </button>
+                    </div>
                     <button class="hidden p-2 rounded-lg bg-white/5 dark:bg-white/10 backdrop-blur-sm border border-white/10 nav-toggle cursor-target" data-action="toggle-mobile-menu" aria-label="Toggle menu">
                         <span class="material-symbols-outlined text-white">menu</span>
                     </button>
@@ -1119,35 +1124,158 @@
 
     <script src="auth.js?v=3.0.1&t=1735396800"></script>
     <script>
-    // Disable auth gating and route to custom signup page
-    window.SKIP_AUTH = true;
+    // Enhanced auth handling with proper login/signup detection
     (function(){
       function onReady(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);} else { fn(); } }
-      onReady(function(){
-        try {
-          if (window.authManager) {
-            authManager.isAuthenticated = () => true;
-            authManager.getAuthHeader = () => ({});
-            authManager.showLoginModal = () => { window.location.href = '/signup'; };
-            authManager.showRegisterModal = () => { window.location.href = '/signup'; };
-            // Make sure gated UI is visible
-            authManager.showAuthenticatedFeatures = () => {
-              document.querySelectorAll('.auth-required').forEach(el => { el.style.display = 'block'; });
-            };
-            authManager.hideAuthenticatedFeatures = () => {};
-            setTimeout(() => authManager.updateNavigation && authManager.updateNavigation(), 0);
-          }
-          document.querySelectorAll('.auth-required').forEach(el => { el.style.display = 'block'; });
-          // Hide signup link if we already captured a lead
+      
+      function updateAuthUI() {
+        const token = localStorage.getItem('mindmate_token');
+        const userStr = localStorage.getItem('mindmate_user');
+        const authButtons = document.getElementById('auth-buttons');
+        
+        console.log('🔍 Auth check - Token:', !!token, 'User:', !!userStr);
+        
+        if (token && userStr) {
           try {
-            const lead = localStorage.getItem('mindmate_lead');
-            if (lead) {
-              const item = document.getElementById('signupNavItem');
-              if (item) item.style.display = 'none';
+            const user = JSON.parse(userStr);
+            console.log('✅ User authenticated:', user.username);
+            
+            // Hide auth buttons
+            if (authButtons) {
+              authButtons.style.display = 'none';
+              console.log('🔒 Auth buttons hidden');
             }
-          } catch (_) {}
-        } catch (_) {}
+            
+            // Create and show user menu
+            const navLinksContainer = document.querySelector('.nav-links');
+            if (navLinksContainer && !document.querySelector('.user-menu-btn')) {
+              const userMenu = document.createElement('div');
+              userMenu.className = 'user-menu-btn';
+              userMenu.innerHTML = `
+                <button onclick="showUserDropdown()" style="
+                  background: #2d5a52;
+                  border: 2px solid #25F4DF;
+                  color: white;
+                  padding: 0.5rem 1rem;
+                  border-radius: 0.5rem;
+                  cursor: pointer;
+                  font-size: 14px;
+                  font-weight: 500;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                ">
+                  👤 ${user.username} ▼
+                </button>
+              `;
+              navLinksContainer.appendChild(userMenu);
+              console.log('✅ User menu created for:', user.username);
+            }
+            
+            // Update auth manager if available
+            if (window.authManager) {
+              authManager.user = user;
+              authManager.token = token;
+              authManager.isInitialized = true;
+            }
+            
+          } catch (e) {
+            console.error('❌ Error parsing user data:', e);
+            localStorage.removeItem('mindmate_user');
+            localStorage.removeItem('mindmate_token');
+            showAuthButtons();
+          }
+        } else {
+          console.log('👥 User not authenticated');
+          showAuthButtons();
+        }
+      }
+      
+      function showAuthButtons() {
+        const authButtons = document.getElementById('auth-buttons');
+        if (authButtons) {
+          authButtons.style.display = 'flex';
+          console.log('👥 Auth buttons shown');
+        }
+        
+        // Remove user menu if exists
+        const userMenu = document.querySelector('.user-menu-btn');
+        if (userMenu) {
+          userMenu.remove();
+        }
+      }
+      
+      // Global function for user dropdown
+      window.showUserDropdown = function() {
+        const existing = document.getElementById('userDropdown');
+        if (existing) {
+          existing.remove();
+          return;
+        }
+        
+        const dropdown = document.createElement('div');
+        dropdown.id = 'userDropdown';
+        dropdown.innerHTML = `
+          <a href="#" onclick="showProfile(); event.preventDefault();">📊 My Profile</a>
+          <a href="#" onclick="logout(); event.preventDefault();">🚪 Logout</a>
+        `;
+        dropdown.style.cssText = `
+          position: fixed;
+          top: 80px;
+          right: 20px;
+          background: #1a4037;
+          border: 2px solid #25F4DF;
+          border-radius: 8px;
+          padding: 8px 0;
+          z-index: 1000;
+          min-width: 150px;
+        `;
+        
+        const links = dropdown.querySelectorAll('a');
+        links.forEach(link => {
+          link.style.cssText = `
+            display: block;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.2s;
+          `;
+          link.onmouseenter = () => link.style.background = '#25F4DF';
+          link.onmouseleave = () => link.style.background = 'transparent';
+        });
+        
+        document.body.appendChild(dropdown);
+        
+        // Close on outside click
+        setTimeout(() => {
+          document.addEventListener('click', function closeDropdown(e) {
+            if (!dropdown.contains(e.target)) {
+              dropdown.remove();
+              document.removeEventListener('click', closeDropdown);
+            }
+          });
+        }, 100);
+      };
+      
+      window.logout = function() {
+        localStorage.removeItem('mindmate_token');
+        localStorage.removeItem('mindmate_user');
+        console.log('🚪 User logged out');
+        window.location.reload();
+      };
+      
+      window.showProfile = function() {
+        alert('Profile feature coming soon!');
+      };
+      
+      // Initialize on DOM ready
+      onReady(function(){
+        updateAuthUI();
+        
+        // Check auth state periodically (in case of login in another tab)
+        setInterval(updateAuthUI, 2000);
       });
+      
     })();
     </script>
     <!-- GSAP Library for enhanced animations -->

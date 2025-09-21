@@ -174,6 +174,10 @@ submitBtn.addEventListener('click', async (e) => {
                 
                 // Redirect to home after success animation
                 setTimeout(() => { 
+                    // Trigger auth UI update on the main page
+                    if (window.opener && window.opener.updateAuthUI) {
+                        window.opener.updateAuthUI();
+                    }
                     window.location.href = '/?welcome=back'; 
                 }, 500);
             } else {
