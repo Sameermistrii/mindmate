@@ -1,6 +1,5 @@
 const containerEl = document.querySelector('.container');
 const checkboxEl = document.querySelector('.form-container .form-row input[type="checkbox"]');
-const nameEl = document.querySelector('.form-container .form-row input[name="name"]');
 const emailEl = document.querySelector('.form-container .form-row input[name="email"]');
 const passwordEl = document.querySelector('.form-container .form-row input[name="password"]');
 const submitBtn = document.querySelector('.form-container .form-row input[type="submit"]');
@@ -66,11 +65,10 @@ const state = {
     sumbitBtnTextOpacity: 0,
     pullProgress: 0
 }
-let nameValid = false;
 let emailValid = false;
 let passwordValid = false;
 
-const emailTl = createEmailTl();
+const passwordTl = createPasswordTl();
 const gearsTls = createGearsTimelines();
 createPullingTimeline(state.handClosed, checkboxEl.checked);
 
@@ -79,10 +77,11 @@ checkboxEl.addEventListener('change', () => {
     createPullingTimeline(state.handClosed, checkboxEl.checked);
 })
 
-nameEl.addEventListener('input', () => {
-    nameValid = nameEl.value.length > 3;
-    if (nameValid) {
-        nameEl.classList.add("valid");
+emailEl.addEventListener('input', () => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    emailValid = emailRegex.test(emailEl.value);
+    if (emailValid) {
+        emailEl.classList.add("valid");
         gearsTls.forEach(tl => {
             if (tl.paused()) {
                 tl.play();
@@ -94,7 +93,7 @@ nameEl.addEventListener('input', () => {
             }
         })
     } else {
-        nameEl.classList.remove("valid");
+        emailEl.classList.remove("valid");
         gearsTls.forEach(tl => {
             if (!tl.paused()) {
                 gsap.to(tl, {
@@ -113,67 +112,47 @@ nameEl.addEventListener('input', () => {
     }
 })
 
-emailEl.addEventListener('input', () => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    emailValid = emailRegex.test(emailEl.value);
-    if (emailValid) {
-        emailTl.play();
-        emailEl.classList.add("valid");
-    } else {
-        emailTl.reverse();
-        emailEl.classList.remove("valid");
-    }
-})
-
 passwordEl.addEventListener('input', () => {
-    passwordValid = passwordEl.value.length >= 6;
+    passwordValid = passwordEl.value.length > 3;
     if (passwordValid) {
+        passwordTl.play();
         passwordEl.classList.add("valid");
     } else {
+        passwordTl.reverse();
         passwordEl.classList.remove("valid");
     }
 })
 
 submitBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (emailValid && passwordValid && checkboxEl.checked && nameValid && sprayRepeatCounter > 1) {
+    if (emailValid && passwordValid && checkboxEl.checked && sprayRepeatCounter > 1) {
         try {
             // Show loading state
-            submitBtn.value = 'Creating Account...';
+            submitBtn.value = 'Logging In...';
             submitBtn.disabled = true;
             
-            // Prepare registration data
-            const registrationData = {
-                username: nameEl.value.trim(),
-                email: emailEl.value.trim(),
+            // Prepare login data - API expects username, but we'll send email as username
+            const loginData = {
+                username: emailEl.value.trim(), // API expects username field
                 password: passwordEl.value
             };
             
-            // Send registration request to backend
-            const response = await fetch('/api/auth/register', {
+            // Send login request to backend
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(registrationData)
+                body: JSON.stringify(loginData)
             });
             
             const result = await response.json();
             
             if (response.ok && result.success) {
-                // Store lead info for compatibility
-                const lead = { 
-                    name: nameEl.value.trim(), 
-                    email: emailEl.value.trim(), 
-                    subscribed: checkboxEl.checked, 
-                    ts: Date.now(),
-                    registered: true
-                };
-                localStorage.setItem('mindmate_lead', JSON.stringify(lead));
-                
                 // Store auth token
                 if (result.token) {
                     localStorage.setItem('mindmate_token', result.token);
+                    localStorage.setItem('mindmate_user', JSON.stringify(result.user));
                 }
                 
                 // Success animation
@@ -195,17 +174,15 @@ submitBtn.addEventListener('click', async (e) => {
                 
                 // Redirect to home after success animation
                 setTimeout(() => { 
-                    window.location.href = '/?welcome=true'; 
+                    window.location.href = '/?welcome=back'; 
                 }, 500);
             } else {
-                // Handle registration error
-                let errorMessage = result.error || 'Registration failed. Please try again.';
+                // Handle login error
+                let errorMessage = result.error || 'Login failed. Please try again.';
                 
                 // Provide more specific error messages
-                if (errorMessage.includes('UNIQUE constraint failed: users.email')) {
-                    errorMessage = 'This email address is already registered. Please use a different email or try logging in.';
-                } else if (errorMessage.includes('UNIQUE constraint failed: users.username')) {
-                    errorMessage = 'This username is already taken. Please choose a different username.';
+                if (errorMessage.includes('Invalid credentials')) {
+                    errorMessage = 'Invalid email or password. Please check your credentials and try again.';
                 }
                 
                 alert(errorMessage);
@@ -213,7 +190,7 @@ submitBtn.addEventListener('click', async (e) => {
                 submitBtn.disabled = false;
             }
         } catch (error) {
-            console.error('Registration error:', error);
+            console.error('Login error:', error);
             alert('Network error. Please check your connection and try again.');
             submitBtn.value = 'Submit';
             submitBtn.disabled = false;
@@ -221,10 +198,9 @@ submitBtn.addEventListener('click', async (e) => {
     } else {
         // Show validation message
         let message = 'Please complete all fields:\n';
-        if (!nameValid) message += '- Name must be more than 3 characters\n';
         if (!emailValid) message += '- Valid email address required\n';
-        if (!passwordValid) message += '- Password must be at least 6 characters\n';
-        if (!checkboxEl.checked) message += '- Please accept terms\n';
+        if (!passwordValid) message += '- Password must be more than 3 characters\n';
+        if (!checkboxEl.checked) message += '- Please check remember me\n';
         if (sprayRepeatCounter <= 1) message += '- Please wait for form validation\n';
         alert(message);
     }
@@ -342,7 +318,7 @@ function updateSpiralPath(centerX, centerY, radius, coils, points, offset) {
     })
 }
 
-function createEmailTl() {
+function createPasswordTl() {
     const spiralTurnsNumber = 8;
     const spiralProgress = {v: 0}
     const hammerTimeStart = 1.85;

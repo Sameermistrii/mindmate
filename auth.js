@@ -528,6 +528,8 @@ class AuthManager {
 
     updateNavigation() {
         const navLinks = document.querySelector('.nav-links');
+        const signupNavItem = document.getElementById('signupNavItem');
+        
         if (!navLinks) {
             console.log('⚠️ Navigation container not found');
             return;
@@ -538,6 +540,14 @@ class AuthManager {
         console.log('🔄 Updating navigation - authenticated:', isAuthenticatedForUI, 'user:', this.user?.username);
         
         if (isAuthenticatedForUI) {
+            // Hide the original signup button
+            if (signupNavItem) {
+                signupNavItem.style.display = 'none';
+            }
+            
+            // Remove any existing auth buttons and user menu
+            navLinks.querySelectorAll('.user-menu, .auth-buttons, .auth-btn-item').forEach(el => el.remove());
+            
             // Add user menu with nuclear event handling
             const userMenu = `
                 <li class="user-menu">
@@ -566,6 +576,12 @@ class AuthManager {
             if (existingUserMenu) existingUserMenu.remove();
             if (existingAuthButtons) existingAuthButtons.remove();
             
+            // Hide the original signup button
+            const signupNavItem = document.getElementById('signupNavItem');
+            if (signupNavItem) {
+                signupNavItem.style.display = 'none';
+            }
+            
             navLinks.insertAdjacentHTML('beforeend', userMenu);
             console.log('✅ User menu added for:', this.user.username);
             
@@ -583,10 +599,16 @@ class AuthManager {
                 }, 100);
             }
         } else {
+            // Show the original signup button for guest users
+            const signupNavItem = document.getElementById('signupNavItem');
+            if (signupNavItem) {
+                signupNavItem.style.display = 'block';
+            }
+            
             // Add login/register buttons with proper styling
             const authButtons = `
                 <li class="auth-btn-item">
-                    <button class="btn btn-secondary auth-btn" onclick="authManager.showLoginModal()" style="
+                    <button class="btn btn-secondary auth-btn" onclick="window.location.href='/login/'" style="
                         background: transparent;
                         border: 2px solid #25F4DF;
                         color: #25F4DF;
@@ -600,20 +622,7 @@ class AuthManager {
                         transition: all 0.3s ease;
                     " onmouseover="this.style.background='#25F4DF'; this.style.color='#1a4037';" onmouseout="this.style.background='transparent'; this.style.color='#25F4DF';">🔑 Login</button>
                 </li>
-                <li class="auth-btn-item">
-                    <button class="btn btn-primary auth-btn" onclick="authManager.showRegisterModal()" style="
-                        background: #25F4DF;
-                        border: 2px solid #25F4DF;
-                        color: #1a4037;
-                        padding: 0.5rem 1rem;
-                        border-radius: 0.5rem;
-                        cursor: pointer;
-                        font-family: inherit;
-                        font-size: 14px;
-                        font-weight: 500;
-                        transition: all 0.3s ease;
-                    " onmouseover="this.style.background='transparent'; this.style.color='#25F4DF';" onmouseout="this.style.background='#25F4DF'; this.style.color='#1a4037';">🚀 Sign Up</button>
-                </li>
+            `;
             `;
             
             // Remove existing auth buttons and user menu
@@ -770,7 +779,6 @@ class AuthManager {
         dropdown.appendChild(closeBtn);
         
         console.log('✅ Nuclear user dropdown deployed!');
-    }
         
         // Close dropdown when clicking outside
         setTimeout(() => {

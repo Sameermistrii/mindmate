@@ -101,9 +101,17 @@ app.use(express.static(__dirname, {
 // Serve the custom signup page static assets at /signup/
 app.use('/signup', express.static(path.join(__dirname, 'Sign Up Page')));
 
+// Serve the custom login page static assets at /login/
+app.use('/login', express.static(path.join(__dirname, 'Login Page')));
+
 // Ensure /signup (no trailing slash) redirects to /signup/
 app.get('/signup', (req, res) => {
     res.redirect(301, '/signup/');
+});
+
+// Ensure /login (no trailing slash) redirects to /login/
+app.get('/login', (req, res) => {
+    res.redirect(301, '/login/');
 });
 
 // Health check endpoint with enhanced status
@@ -202,8 +210,14 @@ app.post('/api/auth/register', async (req, res) => {
         console.log('✅ DEBUG: Registration response sent');
     } catch (error) {
         console.error('❌ DEBUG: Registration error:', error);
-        if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
-            res.status(400).json({ error: 'Username or email already exists' });
+        if (error.code === 'SQLITE_CONSTRAINT_UNIQUE' || error.code === 'SQLITE_CONSTRAINT') {
+            if (error.message.includes('users.email')) {
+                res.status(400).json({ error: 'Email already registered. Please use a different email or try logging in.' });
+            } else if (error.message.includes('users.username')) {
+                res.status(400).json({ error: 'Username already taken. Please choose a different username.' });
+            } else {
+                res.status(400).json({ error: 'Username or email already exists' });
+            }
         } else {
             res.status(500).json({ error: 'Registration failed' });
         }
