@@ -1,0 +1,187 @@
+/* MindMate Enhanced Target Cursor Styles */
+/* Ultra-luxurious 3D professional aesthetic with comprehensive element support */
+
+.target-cursor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    will-change: transform, rotate;
+}
+
+.target-cursor-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--cyan, #25F4DF);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform, scale;
+    box-shadow: 
+        0 0 10px var(--cyan, #25F4DF),
+        0 0 20px var(--cyan, #25F4DF),
+        0 0 30px var(--cyan, #25F4DF);
+    animation: cursor-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cursor-pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.85; 
+        transform: translate(-50%, -50%) scale(1.15); /* Balanced pulse effect */
+    }
+}
+
+.target-cursor-corner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border: 3px solid var(--cyan, #25F4DF);
+    will-change: transform;
+    transition: all 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Optimized easing curve */
+    box-shadow: 
+        0 0 8px var(--cyan, #25F4DF),
+        inset 0 0 8px rgba(37, 244, 223, 0.3);
+}
+
+/* Corner positioning with luxury styling */
+.corner-tl {
+    transform: translate(-150%, -150%);
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+}
+
+.corner-tr {
+    transform: translate(50%, -150%);
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+}
+
+.corner-br {
+    transform: translate(50%, 50%);
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+}
+
+.corner-bl {
+    transform: translate(-150%, 50%);
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+}
+
+/* Hover effects for corners */
+.target-cursor-corner:hover {
+    border-color: var(--white, #FFFFFF);
+    box-shadow: 
+        0 0 12px var(--white, #FFFFFF),
+        inset 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced glow for dark theme */
+@media (prefers-color-scheme: dark) {
+    .target-cursor-dot {
+        background: var(--cyan, #25F4DF);
+        box-shadow: 
+            0 0 15px var(--cyan, #25F4DF),
+            0 0 30px var(--cyan, #25F4DF),
+            0 0 45px rgba(37, 244, 223, 0.5);
+    }
+    
+    .target-cursor-corner {
+        border-color: var(--cyan, #25F4DF);
+        box-shadow: 
+            0 0 12px var(--cyan, #25F4DF),
+            inset 0 0 12px rgba(37, 244, 223, 0.4);
+    }
+}
+
+/* Enhanced cursor interaction for all interactive elements */
+
+/* Make sure all interactive elements are recognized */
+a, button, input, select, textarea, label,
+[role="button"], [role="link"], [role="tab"], [role="menuitem"],
+[tabindex], [data-action], [onclick],
+.btn, .button, .link, .nav-link, .menu-item,
+.quiz-option, .learning-card, .career-card, .feature-card,
+.cursor-target, .clickable, .interactive,
+.bottom-nav button, .nav-links a, .user-menu,
+.stat-card, .achievement-card, .progress-card,
+.learning-card-btn, .career-match-card, .recommendation-card,
+.modal .close-modal, .modal button {
+    /* Ensure elements are recognized as interactive */
+    cursor: pointer !important;
+}
+
+/* Special handling for form elements */
+input, select, textarea {
+    cursor: text !important;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"],
+input[type="checkbox"], input[type="radio"] {
+    cursor: pointer !important;
+}
+
+/* Card elements should be interactive */
+.card, .learning-card, .career-card, .feature-card,
+.stat-card, .achievement-card, .progress-card {
+    cursor: pointer !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease; /* Faster hover transitions */
+}
+
+.card:hover, .learning-card:hover, .career-card:hover, .feature-card:hover,
+.stat-card:hover, .achievement-card:hover, .progress-card:hover {
+    transform: translateY(-1px); /* Less dramatic hover effect */
+}
+
+/* Navigation elements */
+.nav-links a, .bottom-nav button, .user-menu button {
+    cursor: pointer !important;
+}
+
+/* Quiz elements */
+.quiz-option, .quiz-nav-btn {
+    cursor: pointer !important;
+}
+
+/* Ensure target cursor works with dynamic content */
+.target-cursor-enhanced * {
+    cursor: inherit;
+}
+
+/* Performance optimizations */
+.target-cursor-wrapper,
+.target-cursor-dot,
+.target-cursor-corner {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Accessibility - reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .target-cursor-dot {
+        animation: none;
+    }
+    
+    .target-cursor-wrapper,
+    .target-cursor-corner {
+        transition: none;
+    }
+}

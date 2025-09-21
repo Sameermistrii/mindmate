@@ -1,0 +1,112 @@
+{
+  "name": "MindMate - AI Career Guidance",
+  "short_name": "MindMate",
+  "description": "AI-powered career guidance platform for personalized career assessments, learning resources, and community networking",
+  "version": "1.2.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#25F4DF",
+  "background_color": "#0a0a0a",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "career", "productivity", "business"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9IiMwYTBhMGEiLz4KPHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxMiIgeT0iMTIiPgo8cGF0aCBkPSJNMjQgNEMxMi45NTQgNCA0IDEyLjk1NCA0IDI0QzQgMzUuMDQ2IDEyLjk1NCA0NCAyNCA0NEMzNS4wNDYgNDQgNDQgMzUuMDQ2IDQ0IDI0QzQ0IDEyLjk1NCAzNS4wNDYgNCAyNCA0WiIgZmlsbD0iIzI1RjRERiIvPgo8cGF0aCBkPSJNMjQgMTJDMTcuMzcyIDEyIDEyIDEzLjc5IDEyIDE2QzEyIDE4LjIxIDE3LjM3MiAyMCAyNCAyMEMzMC42MjggMjAgMzYgMTguMjEgMzYgMTZDMzYgMTMuNzkgMzAuNjI4IDEyIDI0IDEyWiIgZmlsbD0iIzBhMGEwYSIvPgo8cGF0aCBkPSJNMzYgMjRDMzYgMjYuMjEgMzAuNjI4IDI4IDI0IDI4QzE3LjM3MiAyOCAxMiAyNi4yMSAxMiAyNFYxNkMxMiAxOC4yMSAxNy4zNzIgMjAgMjQgMjBDMzAuNjI4IDIwIDM2IDE4LjIxIDM2IDE2VjI0WiIgZmlsbD0iIzBhMGEwYSIvPgo8cGF0aCBkPSJNMzYgMzJDMzYgMzQuMjEgMzAuNjI4IDM2IDI0IDM2QzE3LjM3MiAzNiAxMiAzNC4yMSAxMiAzMlYyNEMxMiAyNi4yMSAxNy4zNzIgMjggMjQgMjhDMzAuNjI4IDI4IDM2IDI2LjIxIDM2IDI0VjMyWiIgZmlsbD0iIzBhMGEwYSIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiMwYTBhMGEiLz4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxNiIgeT0iMTYiPgo8cGF0aCBkPSJNMzIgNEMxNy4yNzIgNCA1IDE3LjI3MiA1IDMyQzUgNDYuNzI4IDE3LjI3MiA1OSAzMiA1OUM0Ni43MjggNTkgNTkgNDYuNzI4IDU5IDMyQzU5IDE3LjI3MiA0Ni43MjggNCAzMiA0WiIgZmlsbD0iIzI1RjRERiIvPgo8cGF0aCBkPSJNMzIgMTRDMjIuNDk2IDE0IDE1IDE3LjA1MyAxNSAyMEMxNSAyMi45NDcgMjIuNDk2IDI2IDMyIDI2QzQxLjUwNCAyNiA0OSAyMi45NDcgNDkgMjBDNDkgMTcuMDUzIDQxLjUwNCAxNCAzMiAxNFoiIGZpbGw9IiMwYTBhMGEiLz4KPHBhdGggZD0iTTQ5IDMwQzQ5IDMyLjk0NyA0MS41MDQgMzYgMzIgMzZDMjIuNDk2IDM2IDE1IDMyLjk0NyAxNSAzMFYyMEMxNSAyMi45NDcgMjIuNDk2IDI2IDMyIDI2QzQxLjUwNCAyNiA0OSAyMi45NDcgNDkgMjBWMzBaIiBmaWxsPSIjMGEwYTBhIi8+CjxwYXRoIGQ9Ik00OSA0MEMxNSA0Mi45NDcgNDEuNTA0IDQ2IDMyIDQ2QzIyLjQ5NiA0NiAxNSA0Mi45NDcgMTUgNDBWMzBDMTUgMzIuOTQ3IDIyLjQ5NiAzNiAzMiAzNkM0MS41MDQgMzYgNDkgMzIuOTQ3IDQ5IDMwVjQwWiIgZmlsbD0iIzBhMGEwYSIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMwYTBhMGEiLz4KPHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMzIiIHk9IjMyIj4KPHBhdGggZD0iTTY0IDhDMzQuNTQ0IDggMTAgMzQuNTQ0IDEwIDY0QzEwIDkzLjQ1NiAzNC41NDQgMTE4IDY0IDExOEM5My40NTYgMTE4IDExOCA5My40NTYgMTE4IDY0QzExOCAzNC41NDQgOTMuNDU2IDggNjQgOFoiIGZpbGw9IiMyNUY0REYiLz4KPHBhdGggZD0iTTY0IDI0QzQ0Ljk5MiAyNCAzMCAyOS40MDYgMzAgMzZDMzAgNDIuNTk0IDQ0Ljk5MiA0OCA2NCA0OEM4My4wMDggNDggOTggNDIuNTk0IDk4IDM2Qzk4IDI5LjQwNiA4My4wMDggMjQgNjQgMjRaIiBmaWxsPSIjMGEwYTBhIi8+CjxwYXRoIGQ9Ik05OCA1MkM5OCA1OC41OTQgODMuMDA4IDY0IDY0IDY0QzQ0Ljk5MiA2NCAzMCA1OC41OTQgMzAgNTJWMzZDMzAgNDIuNTk0IDQ0Ljk5MiA0OCA2NCA0OEM4My4wMDggNDggOTggNDIuNTk0IDk4IDM2VjUyWiIgZmlsbD0iIzBhMGEwYSIvPgo8cGF0aCBkPSJNOTggNjhDOTggNzQuNTk0IDgzLjAwOCA4MCA2NCA4MEM0NC45OTIgODAgMzAgNzQuNTk0IDMwIDY4VjUyQzMwIDU4LjU5NCA0NC45OTIgNjQgNjQgNjRDODMuMDA4IDY0IDk4IDU4LjU5NCA5OCA1MlY2OFoiIGZpbGw9IiMwYTBhMGEiLz4KPHBhdGggZD0iTTk4IDg0Qzk4IDkwLjU5NCA4My4wMDggOTYgNjQgOTZDNDQuOTkyIDk2IDMwIDkwLjU5NCAzMCA4NFY2OEMzMCA3NC41OTQgNDQuOTkyIDgwIDY0IDgwQzgzLjAwOCA4MCA5OCA3NC41OTQgOTggNjhWODRaIiBmaWxsPSIjMGEwYTBhIi8+Cjwvc3ZnPgo8L3N2Zz4=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTA0IiBmaWxsPSIjMGEwYTBhIi8+Cjxzdmcgd2lkdGg9IjM0MCIgaGVpZ2h0PSIzNDAiIHZpZXdCb3g9IjAgMCAzNDAgMzQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9Ijg2IiB5PSI4NiI+CjxwYXRoIGQ9Ik0xNzAgMjBDOTEuNzc2IDIwIDI4IDkxLjc3NiAyOCAxNzBDMjggMjQ4LjIyNCA5MS43NzYgMzIwIDE3MCAzMjBDMjQ4LjIyNCAzMjAgMzIwIDI0OC4yMjQgMzIwIDE3MEMzMjAgOTEuNzc2IDI0OC4yMjQgMjAgMTcwIDIwWiIgZmlsbD0iIzI1RjRERiIvPgo8cGF0aCBkPSJNMTcwIDY0QzExOS45ODQgNjQgODAgNzcuNzYxIDgwIDk2Qzg2IDExNC4yMzkgMTE5Ljk4NCAxMjggMTcwIDEyOEMyMjAuMDE2IDEyOCAyNjAgMTE0LjIzOSAyNjAgOTZDMjYwIDc3Ljc2MSAyMjAuMDE2IDY0IDE3MCA2NFoiIGZpbGw9IiMwYTBhMGEiLz4KPHBhdGggZD0iTTI2MCAxMzhDMjYwIDE1Ni4yMzkgMjIwLjAxNiAxNzAgMTcwIDE3MEMxMTkuOTg0IDE3MCA4IDE1Ni4yMzkgODAgMTM4Vjk2Qzg2IDExNC4yMzkgMTE5Ljk4NCAxMjggMTcwIDEyOEMyMjAuMDE2IDEyOCAyNjAgMTE0LjIzOSAyNjAgOTZWMTM4WiIgZmlsbD0iIzBhMGEwYSIvPgo8cGF0aCBkPSJNMjYwIDE4MEMyNjAgMTk4LjIzOSAyMjAuMDE2IDIxMiAxNzAgMjEyQzExOS45ODQgMjEyIDgwIDE5OC4yMzkgODAgMTgwVjEzOEM4MCAxNTYuMjM5IDExOS45ODQgMTcwIDE3MCAxNzBDMjIwLjAxNiAxNzAgMjYwIDE1Ni4yMzkgMjYwIDEzOFYxODBaIiBmaWxsPSIjMGEwYTBhIi8+CjxwYXRoIGQ9Ik0yNjAgMjIyQzI2MCAyNDAuMjM5IDIyMC4wMTYgMjU0IDE3MCAyNTRDMTE5Ljk4NCAyNTQgODAgMjQwLjIzOSA4MCAyMjJWMTgwQzgwIDE5OC4yMzkgMTE5Ljk4NCAyMTIgMTcwIDIxMkMyMjAuMDE2IDIxMiAyNjAgMTk4LjIzOSAyNjAgMTgwVjIyMloiIGZpbGw9IiMwYTBhMGEiLz4KPC9zdmc+Cjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIHZpZXdCb3g9IjAgMCAxMjgwIDcyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiBmaWxsPSIjMGEwYTBhIi8+Cjx0ZXh0IHg9IjY0MCIgeT0iMzYwIiBmaWxsPSIjMjVGNERGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iNDgiIGZvbnQtd2VpZ2h0PSI3MDAiPk1pbmRNYXRlPC90ZXh0Pgo8dGV4dCB4PSI2NDAiIHk9IjQyMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjI0Ij5BSS1Qb3dlcmVkIENhcmVlciBHdWlkYW5jZSBQbGF0Zm9ybTwvdGV4dD4KPC9zdmc+",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "MindMate Desktop View"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjEzMzQiIHZpZXdCb3g9IjAgMCA3NTAgMTMzNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSIxMzM0IiBmaWxsPSIjMGEwYTBhIi8+Cjx0ZXh0IHg9IjM3NSIgeT0iNjY3IiBmaWxsPSIjMjVGNERGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI3MDAiPk1pbmRNYXRlPC90ZXh0Pgo8dGV4dCB4PSIzNzUiIHk9IjcyMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE4Ij5BSSBDYXJlZXIgR3VpZGFuY2U8L3RleHQ+Cjwvc3ZnPg==",
+      "sizes": "750x1334",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "MindMate Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Take Assessment",
+      "short_name": "Assessment",
+      "description": "Start your career assessment",
+      "url": "/?action=assessment",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiMyNUY0REYiLz4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxNiIgeT0iMTYiPgo8cGF0aCBkPSJNMTYgMTZIMTZWNDhINDhWMTZIMTZaIiBzdHJva2U9IiMwYTBhMGEiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSIvPgo8cGF0aCBkPSJNMjQgMjRIMzJNMjQgMzJIMzJNMjQgNDBIMzIiIHN0cm9rZT0iIzBhMGEwYSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo8L3N2Zz4=",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "AI Mentor",
+      "short_name": "AI Chat",
+      "description": "Chat with AI mentor",
+      "url": "/?action=chat",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiMyNUY0REYiLz4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxNiIgeT0iMTYiPgo8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIxNiIgZmlsbD0iIzBhMGEwYSIvPgo8Y2lyY2xlIGN4PSIyNCIgY3k9IjI4IiByPSIyIiBmaWxsPSIjMjVGNERGIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiMyNUY0REYiLz4KPHBhdGggZD0iTTI0IDM2UzI2IDQwIDMyIDQwUzQwIDM2IDQwIDM2IiBzdHJva2U9IiMyNUY0REYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4KPC9zdmc+",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Community",
+      "short_name": "Community",
+      "description": "Join community discussions",
+      "url": "/?action=community",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiMyNUY0REYiLz4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxNiIgeT0iMTYiPgo8Y2lyY2xlIGN4PSIyNCIgY3k9IjI0IiByPSI4IiBmaWxsPSIjMGEwYTBhIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iMjQiIHI9IjgiIGZpbGw9IiMwYTBhMGEiLz4KPGNpcmNsZSBjeD0iMzIiIGN5PSI0MCIgcj0iOCIgZmlsbD0iIzBhMGEwYSIvPgo8L3N2Zz4KPC9zdmc+",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+mindmate",
+      "url": "/?action=%s"
+    }
+  ]
+}

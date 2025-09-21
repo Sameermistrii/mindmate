@@ -1,0 +1,34 @@
+{
+  "name": "mindmate",
+  "version": "1.0.2",
+  "type": "module",
+  "description": "AI-powered career guidance platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Build completed'",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "career",
+    "ai",
+    "mentor",
+    "assessment"
+  ],
+  "author": "Sam",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "openai": "^4.55.6",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
